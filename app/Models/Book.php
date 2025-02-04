@@ -39,7 +39,7 @@ class Book extends Model
     ];
 
     /**
-     * @return HasMany<BookStock>
+     * @return HasMany<BookStock, $this>
      */
     public function stocks(): HasMany
     {
