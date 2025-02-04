@@ -1,0 +1,203 @@
+openapi: 3.0.3
+info:
+  title: 書店在庫管理システム
+  version: 1.0.0
+  description: 本の在庫管理システムです
+servers:
+  - url: http://localhost:8000/api
+tags:
+  - name: book
+    description: 本に関する API
+  - name: book_stock
+    description: 在庫に関する API
+paths:
+  /books:
+    get:
+      summary: 本の一覧を取得
+      tags:
+        - book
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+    post:
+      summary: 本の新規登録
+      tags:
+        - book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                isbn:
+                  type: string
+              required:
+                - title
+                - isbn
+      responses:
+        '201':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+
+  /books/{book_id}:
+    get:
+      summary: 本の単一取得
+      tags:
+        - book
+      parameters:
+        - $ref: '#/components/parameters/BookId'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      summary: 本の更新
+      tags:
+        - book
+      parameters:
+        - $ref: '#/components/parameters/BookId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                isbn:
+                  type: string
+              required:
+                - title
+                - isbn
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /books/{book_id}/stocks:
+    get:
+      summary: 指定した ID の本の在庫数の取得
+      tags:
+        - book_stock
+      parameters:
+        - $ref: '#/components/parameters/BookId'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  book_id:
+                    type: integer
+                    minimum: 1
+                  quantity:
+                    type: integer
+    patch:
+      summary: 本の在庫を増減させる
+      tags:
+        - book_stock
+      parameters:
+        - $ref: '#/components/parameters/BookId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity_change:
+                  type: integer
+                  description: 増減数
+                  example: 5
+              required:
+                - quantity_change
+      responses:
+        '204':
+          description: 成功
+
+components:
+  parameters:
+    BookId:
+      name: book_id
+      in: path
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+  responses:
+    NotFound:
+      description: リソースが見つからない
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "指定された本は存在しません"
+  schemas:
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+          maximum: 1
+        title:
+          type: string
+        isbn:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - title
+        - isbn
+        - created_at
+        - updated_at
+    BookStock:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        book_id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - book_id
+        - created_at
+        - updated_at
