@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int             $id
  * @property int             $book_id
  * @property CarbonImmutable $created_at
- * @property Book            $book
+ * @property BookStock       $book
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BookStock newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BookStock newQuery()
