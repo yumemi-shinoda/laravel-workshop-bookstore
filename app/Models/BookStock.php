@@ -36,7 +36,7 @@ class BookStock extends Model
     ];
 
     /**
-     * @return BelongsTo<Book>
+     * @return BelongsTo<Book, $this>
      */
     public function book(): BelongsTo
     {
