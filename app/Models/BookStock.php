@@ -22,6 +22,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class BookStock extends Model
 {
+    /**
+     * @var null
+     */
     public const null UPDATED_AT = null;
 
 
