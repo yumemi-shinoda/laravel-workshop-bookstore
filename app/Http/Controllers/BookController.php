@@ -31,6 +31,9 @@ class BookController
         return $book;
     }
 
+    /**
+     * @return Collection<int, Book>
+     */
     public function index(): Collection
     {
         return Book::all();
