@@ -15,6 +15,9 @@ use Illuminate\Validation\ValidationException;
 
 class BookStockController
 {
+    /**
+     * @return array{book_id: int, quantity: int}
+     */
     public function count(Book $book): array
     {
         // Book を一度取得しているのは，NotFound を出すため
