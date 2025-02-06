@@ -35,19 +35,19 @@ class BookStockController
     {
         // バリデーション
         $validator = Validator::make($request->all(), [
-            'quantity_change' => ['required', 'integer']
+            'quantity_change' => ['required', 'integer'],
         ]);
         $validator->validate();
 
         // 増減数
         $quantity = $request->integer('quantity_change');
 
-        return DB::transaction(function () use ($book, $quantity): Response  {
+        return DB::transaction(function () use ($book, $quantity): Response {
             if ($quantity >= 0) {
                 // 増減数が正の数ならその分だけレコードを追加
 
                 BookStock::query()
-                    ->insert(array_fill(0, $quantity,[
+                    ->insert(array_fill(0, $quantity, [
                         'book_id' => $book->id,
                         'created_at' => now(),
                     ]));
