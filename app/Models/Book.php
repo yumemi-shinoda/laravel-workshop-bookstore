@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Carbon\CarbonImmutable;
+use Database\Factories\BookFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -25,6 +27,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Book extends Model
 {
+    /** @use HasFactory<BookFactory> */
+    use HasFactory;
+
     protected $fillable = [
         'title',
         'isbn',
