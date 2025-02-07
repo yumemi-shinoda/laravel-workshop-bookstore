@@ -81,8 +81,8 @@ class BookControllerTest extends TestCase
                 ->where('id', $book->id)
                 ->where('title', $book->title)
                 ->where('isbn', $book->isbn)
-                ->where('created_at', $book->created_at->toJSON())
-                ->where('updated_at', $book->updated_at->toJSON())
+                ->where('created_at', $book->created_at?->toJSON())
+                ->where('updated_at', $book->updated_at?->toJSON())
         );
     }
 

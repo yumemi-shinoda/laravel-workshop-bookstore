@@ -9,7 +9,7 @@ use App\Models\BookStock;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\BookStock>
+ * @extends Factory<BookStock>
  */
 class BookStockFactory extends Factory
 {
