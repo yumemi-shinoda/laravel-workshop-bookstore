@@ -60,8 +60,8 @@ class BookControllerTest extends TestCase
                 ->whereType('id', 'integer')
                 ->where('title', 'テスト本')
                 ->where('isbn', 'xxx-xxx-xxx-xxx')
-                ->where('created_at','2024-01-01T00:00:00.000000Z')
-                ->where('updated_at','2024-01-01T00:00:00.000000Z')
+                ->where('created_at', '2024-01-01T00:00:00.000000Z')
+                ->where('updated_at', '2024-01-01T00:00:00.000000Z')
         );
     }
 
